@@ -87,5 +87,8 @@ public class MovilPesado extends Robot {
     public boolean movimiento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+        @Override
+    public String toString() {
+        return "Robot Pesado " + ID;
+    }
 }

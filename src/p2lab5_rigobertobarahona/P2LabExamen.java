@@ -39,9 +39,9 @@ public class P2LabExamen {
                     }else{
                         System.out.print("Posicion X: ");
                         int X = lea.nextInt();
-                        System.out.println("Posicion Y: ");
+                        System.out.print("Posicion Y: ");
                         int Y = lea.nextInt();
-                        System.out.println("Esta Cargado (S/N): ");
+                        System.out.print("Esta Cargado (S/N): ");
                         char detectar = lea.next().charAt(0);
                         boolean carga = false;
                         if (detectar == 'S' || detectar == 's'){
@@ -49,14 +49,12 @@ public class P2LabExamen {
                         }
                         String fecha = "";
                         System.out.print("Fecha de Fabricacion: ");
-                        System.out.println();
-                        fecha = lea.nextLine();
-                        System.out.println();
+                        fecha = lea.next();
                         System.out.println("1) Mano Robotica");
                         System.out.println("2) Movil Agil");
                         System.out.println("3) Androide");
                         System.out.println("4) Movil Pesado");
-                        System.out.print("Eligir Tipo de Robot");
+                        System.out.print("Eligir Tipo de Robot: ");
                         int opcion2 = lea.nextInt();
                         ArrayList<Character> load = new ArrayList();
                         switch(opcion2){

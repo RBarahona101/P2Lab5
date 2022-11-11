@@ -115,7 +115,7 @@ public class P2LabExamen {
                         }
                     }
                     if (cont == 0){
-                        System.out.println("Las Manos Roboticas no pueden Automatisarce");
+                        System.out.println("Las Manos Roboticas No Pueden Automaticarse");
                     }else{
                         String salida = "";
                         for (Object temp : robots) {
@@ -133,6 +133,40 @@ public class P2LabExamen {
                         simulacion.clear();
                     }
                     //Fin de Case
+                    break;
+                }
+                case 4:{
+                                 int cont = 0;
+                    if (robots.isEmpty() ){
+                        System.out.println("No hay robots");
+                    } else{
+                        for (int i = 0; i < robots.size() ; i++){
+                            if (robots.get(i) instanceof MovilAgil){
+                                
+                            }else{
+                                cont++;
+                            }
+                        }
+                    }
+                    if (cont == 0){
+                        System.out.println("Las Robots Agiles No Pueden Automaticarse");
+                    }else{
+                        String salida = "";
+                        for (Object temp : robots) {
+                            if (temp instanceof Robot){
+                                salida += robots.indexOf(temp) + " - " + temp + "\n";
+                            }
+                        }
+                        System.out.println(salida);
+                        System.out.print("Seleccionar Indice: ");
+                        int indice = lea.nextInt();
+                        ArrayList<Robot> simulacion = new ArrayList();
+                        simulacion.add( robots.get(indice) );
+                        boolean Sim = true;
+                        // Fin de Juego
+                        simulacion.clear();
+                    }
+                    //Fin de Caso
                     break;
                 }
                 case 5:{
@@ -165,8 +199,31 @@ public class P2LabExamen {
         }
         temp [0][0] = 'R';
         temp [7][7] = 'D';
-        temp [0][7] = 'C';
         
+        temp [0][7] = 'C';
+        temp [1][4] = 'C';
+        temp [2][0] = 'C';
+        
+        temp [6][0] = 'C';
+        temp [7][2] = 'C';
+        temp [7][5] = 'C';
+        
+        temp[0][1] = 'X';
+        temp[0][2] = 'X';
+        temp[1][5] = 'X';
+        temp[2][2] = 'X';
+        temp[2][7] = 'X';
+        temp[3][0] = 'X';
+        temp[3][4] = 'X';
+        temp[3][6] = 'X';
+        temp[3][7] = 'X';
+        
+        temp[5][2] = 'X';
+        temp[5][3] = 'X';
+        temp[5][5] = 'X';
+        temp[6][7] = 'X';
+        temp[7][0] = 'X';
+        temp[7][3] = 'X';
         return temp;
     }
     

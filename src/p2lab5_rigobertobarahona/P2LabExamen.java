@@ -103,6 +103,45 @@ public class P2LabExamen {
                     }
                     break;
                 }
+                case 3: {
+                    int cont = 0;
+                    if (robots.isEmpty() ){
+                        System.out.println("No hay robots");
+                    } else{
+                        for (int i = 0; i < robots.size() ; i++){
+                            if (robots.get(i) instanceof Mano){
+                                
+                            }else{
+                                cont++;
+                            }
+                        }
+                    }
+                    if (cont == 0){
+                        System.out.println("Las Manos Roboticas no pueden Automatisarce");
+                    }else{
+                        String salida = "";
+                        for (Object temp : robots) {
+                            if (temp instanceof Robot){
+                                salida += robots.indexOf(temp) + " - " + temp + "\n";
+                            }
+                        }
+                        System.out.println(salida);
+                        System.out.print("Seleccionar Indice: ");
+                        int indice = lea.nextInt();
+                        ArrayList<Robot> simulacion = new ArrayList();
+                        simulacion.add( robots.get(indice) );
+                        boolean Sim = true;
+                        // Fin de Juego
+                        simulacion.clear();
+                    }
+                    //Fin de Case
+                    break;
+                }
+                case 5:{
+                    matriz = Fill(matriz);
+                    Imprimir(matriz);
+                    break;
+                }
                 default: {
                     flag = false;
                     break;
@@ -126,7 +165,9 @@ public class P2LabExamen {
                 temp[i][j] = ' ';
             }
         }
-        
+        temp [0][0] = 'R';
+        temp [7][7] = 'D';
+        temp [0][7] = 'C';
         
         return temp;
     }

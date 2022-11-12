@@ -11,7 +11,9 @@ public class P2LabExamen {
         boolean flag = true;
         char [][] matriz = new char[8][8];
         ArrayList<Robot> robots = new ArrayList();
-        
+        ArrayList<Character> ip = new ArrayList();
+        robots.add( new Mano (80085, 0, 0, true, "Hoy", ip ) );
+        robots.add( new MovilAgil( 7171, 0, 0, true, "Ayer", ip ) );
         while (flag == true){
             System.out.println("1) Crear Robot ");
             System.out.println("2) Listar Robot");
@@ -119,7 +121,9 @@ public class P2LabExamen {
                     }else{
                         String salida = "";
                         for (Object temp : robots) {
-                            if (temp instanceof Robot){
+                            if (temp instanceof Mano){
+                                
+                            } else {
                                 salida += robots.indexOf(temp) + " - " + temp + "\n";
                             }
                         }
@@ -136,7 +140,7 @@ public class P2LabExamen {
                     break;
                 }
                 case 4:{
-                                 int cont = 0;
+                    int cont = 0;
                     if (robots.isEmpty() ){
                         System.out.println("No hay robots");
                     } else{
@@ -149,11 +153,13 @@ public class P2LabExamen {
                         }
                     }
                     if (cont == 0){
-                        System.out.println("Las Robots Agiles No Pueden Automaticarse");
+                        System.out.println("Las Robots Agiles No Pueden Manejarse");
                     }else{
                         String salida = "";
                         for (Object temp : robots) {
-                            if (temp instanceof Robot){
+                            if (temp instanceof MovilAgil){
+                            
+                            }else{
                                 salida += robots.indexOf(temp) + " - " + temp + "\n";
                             }
                         }
@@ -163,15 +169,261 @@ public class P2LabExamen {
                         ArrayList<Robot> simulacion = new ArrayList();
                         simulacion.add( robots.get(indice) );
                         boolean Sim = true;
+                        
+                        boolean C1;
+                        boolean C2;
+                        boolean C3;
+                        boolean C4; 
+                        boolean C5;
+                        boolean C6;
+                        
+                        int rotacion = 180;
+                        ArrayList<Character> canasta = new ArrayList();
+                        matriz = Fill(matriz);
+                        int X = 0;
+                        int Y = 0;
+                        
+                        Robot r = new Robot();
+                        
+                        try{    
+                        while (Sim == true){
+                            Imprimir(matriz, X, Y);
+                            String d = "Abajo";
+                            if (rotacion == 0){
+                                d = "Arriba";
+                            }else if (rotacion == 90){
+                                d = "Derecha";
+                            } else if (rotacion == 180){
+                                d = "Abajo";
+                            } else if (rotacion == 270){
+                                d = "Izquierda";
+                            }
+                            System.out.println(simulacion + " esta viendo " + d);
+                            System.out.print("Introducir Comando [adv/chr/dmnt/gir/exit]: ");
+                            String cm = lea.next();
+                            switch (cm){
+                                case "exit": {
+                                    Sim = false;
+                                    break;
+                                }
+                                case "adv":{
+                                    if (rotacion == 0){
+                                        if (Y - 1 >= 0){
+                                            if( matriz[Y-1][X] !=  'X'){
+                                                Y = Y - 1;
+                                            }else{
+                                                System.out.println("Bop");
+                                            }
+                                        }
+                                    } else if (rotacion == 90 ){
+                                        if (X + 1 <= 7){
+                                            if (matriz[Y][X+1] != 'X'){
+                                                X = X + 1;
+                                            }
+                                            else{
+                                                System.out.println("Bop");
+                                            }
+                                        }
+                                    } else if (rotacion == 180 ){
+                                        if (Y + 1 <= 7){
+                                            if (matriz[Y+1][X] != 'X'){
+                                                Y = Y + 1;
+                                            }else{
+                                                System.out.println("Bop");
+                                            }
+                                        }
+                                    } else if (rotacion == 270){
+                                        if (X - 1 >= 0){
+                                            if (matriz[Y][X-1] != 'X'){
+                                                X = X - 1;
+                                            }else{
+                                                System.out.println("Bop");
+                                            }
+                                        }
+                                    }
+                                    break;
+                                }
+                                case "chr": {
+                                    if (Y == 0 && X == 7) {
+                                       /* if( r.chr(simulacion) == true) {
+                                        matriz[0][7] = ' '; 
+                                        }
+                                       */
+                                       if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[0][7] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[0][7] = ' ';  
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[0][7] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    } else if (Y == 1 && X == 4){
+                                        if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[1][4] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[1][4] = ' ';
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[1][4] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    }else if (Y == 2 && X == 0){
+                                        if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[2][0] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[2][0] = ' ';
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[2][0] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    }else if (Y == 6 && X == 0){
+                                      if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[6][0] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[6][0] = ' ';
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[6][0] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    }else if (Y == 7 && X == 0){
+                                        if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[7][0] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[7][0] = ' '; 
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[7][0] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    } else if (Y == 7 && X == 3){
+                                        if (simulacion.get(0) instanceof Mano){
+                                           if ( ( (Mano) simulacion.get(0) ).getLoad().isEmpty() ){
+                                               ( (Mano) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[7][3] = ' ';
+                                               System.out.println("Yoink");
+                                           }
+                                           
+                                        } else if ( simulacion.get(0) instanceof Androide ){
+                                            if ( ( (Androide) simulacion.get(0) ).getLoad().size() < 2 ){
+                                               ( (Androide) simulacion.get(0) ).getLoad().add('C');
+                                               matriz[7][3] = ' ';  
+                                               System.out.println("Yoink");
+                                            }
+                                        } else {
+                                            ( (MovilPesado) simulacion.get(0) ).getLoad().add('C');
+                                            matriz[7][3] = ' '; 
+                                            System.out.println("Yoink");
+                                        }
+                                    } else{
+                                        System.out.println("Nope");
+                                    }
+                                    break;
+                                }
+                                case "dmnt": {
+                                    if (Y == 7 && X == 7){
+                                        if (simulacion.get(0) instanceof Mano){
+                                            ( (Mano) simulacion.get(0) ).getLoad().clear();
+                                            canasta.add('C');
+                                            System.out.println("Can't have shite in Detroit");
+                                        } else if (simulacion.get(0) instanceof Androide){
+                                            for (int i = 0; i < ( (Androide) simulacion.get(0) ).getLoad().size() ; i++){
+                                                canasta.add('C');
+                                            }
+                                            ( (Androide) simulacion.get(0) ).getLoad().clear();
+                                            System.out.println("Can't have shite in Detroit");
+                                        } else {
+                                            if ( ((MovilPesado) simulacion.get(0) ).getLoad().size() >= 5){
+                                                for (int i = 0; i < ((MovilPesado) simulacion.get(0) ).getLoad().size(); i++){
+                                                    canasta.add('C');
+                                                }
+                                                ((MovilPesado) simulacion.get(0) ).getLoad().clear();
+                                                System.out.println("Can't have shite in Detroit");
+                                            }else{
+                                                System.out.println("Ha agarrar mas");
+                                            }
+                                        }   
+                                    }else{
+                                        System.out.println("Nope querida");
+                                    }
+                                    break;
+                                }
+                                case "gir": {
+                                    System.out.print("Ingresar Angulo[0, 90, 180, 270]: ");
+                                    int R = lea.nextInt();
+                                    if (R == 0 || R == 90 || R == 180 || R == 270){
+                                        rotacion = R;
+                                    }else{
+                                        System.out.println("Eso no se puede huey");
+                                    }
+                                    break;
+                                }
+                                default: {
+                                    System.out.println("Nope querido");
+                                    break;
+                                }
+                            }
+                            //Fin de While
+                            if (canasta.size() == 6){
+                                Sim = false;
+                            }
+                        }
+                        System.out.println("La simulacion ha terminado");
                         // Fin de Juego
                         simulacion.clear();
+                        canasta.clear();
+                    } catch(Exception IndexoutofBounds){
+                        System.out.println("Oops");
+                    }
                     }
                     //Fin de Caso
-                    break;
-                }
-                case 5:{
-                    matriz = Fill(matriz);
-                    Imprimir(matriz);
                     break;
                 }
                 default: {
@@ -182,10 +434,14 @@ public class P2LabExamen {
         }
         
     }
-    public static void Imprimir(char [][] matriz){
+    public static void Imprimir(char [][] matriz, int X, int Y){
         for (int i = 0; i < matriz.length; i++){
             for (int j = 0; j < matriz[i].length; j++){
-                System.out.print("[" + matriz[i][j] + "]");            
+                if (Y == i && X == j){
+                    System.out.print("[R]");
+                }else{
+                    System.out.print("[" + matriz[i][j] + "]");    
+                }
             }
             System.out.println();
         }
@@ -197,7 +453,7 @@ public class P2LabExamen {
                 temp[i][j] = ' ';
             }
         }
-        temp [0][0] = 'R';
+        
         temp [7][7] = 'D';
         
         temp [0][7] = 'C';
@@ -226,5 +482,7 @@ public class P2LabExamen {
         temp[7][3] = 'X';
         return temp;
     }
-    
+    public static void SimulacionAutomatica(ArrayList<Robot> simulacion, ArrayList<Character> canasta, int X, int Y){
+        
+    }
 }

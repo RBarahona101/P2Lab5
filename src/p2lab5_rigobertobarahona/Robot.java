@@ -2,7 +2,7 @@ package p2lab5_rigobertobarahona;
 
 import java.util.ArrayList;
 
-public abstract class Robot {
+public class Robot implements Tabla {
     
     protected int ID;
     protected int X;
@@ -60,14 +60,43 @@ public abstract class Robot {
         this.carga = carga;
         this.fecha = fecha;
     }
+
+    @Override
+    public int adv() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean chr(ArrayList<Robot> simulacion) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void dmnt(ArrayList<Robot> simulacion, ArrayList<Character> canasta) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int gir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean movimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int status() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean chr() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void dmnt() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
-    public abstract int adv();
-    
-    public abstract ArrayList<Character> chr();
-    
-    public abstract ArrayList<Character> dmnt();
-    
-    public abstract int gir();
-    
-    public abstract boolean movimiento();
 }

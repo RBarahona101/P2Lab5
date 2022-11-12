@@ -67,14 +67,20 @@ public class Androide extends Robot{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public ArrayList<Character> chr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean chr( ArrayList<Robot> simulacion) {
+        if ( ( (Androide)simulacion.get(0) ).getLoad().size() > 2){
+           ( (Androide) simulacion.get(0) ).getLoad().add('C');
+           return true;
+        } else {
+            return false;
+        }
     }
 
-    @Override
-    public ArrayList<Character> dmnt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void dmnt(ArrayList<Robot> simulacion, ArrayList<Character> canasta) {
+        for ( int i = 0; i <( (Androide) simulacion.get(0) ).getLoad().size() ; i++ ){
+            canasta.add('C');
+        }
+        ( (Androide) simulacion.get(0) ).getLoad().clear();
     }
 
     @Override
@@ -85,6 +91,10 @@ public class Androide extends Robot{
     @Override
     public boolean movimiento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public int status(){
+        return 3;
     }
         @Override
     public String toString() {

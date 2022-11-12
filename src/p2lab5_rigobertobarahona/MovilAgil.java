@@ -67,14 +67,19 @@ public class MovilAgil extends Robot{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public ArrayList<Character> chr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean chr(ArrayList<Robot> simulacion) {
+        
+        if ( ( (MovilAgil)simulacion.get(0) ).getLoad().isEmpty() ){
+           ( (MovilAgil) simulacion.get(0) ).getLoad().add('C');
+           return true;
+        } else{
+           return false;
+        }
     }
 
-    @Override
-    public ArrayList<Character> dmnt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void dmnt(ArrayList<Robot> simulacion, ArrayList<Character> canasta) {
+        ( (MovilAgil) simulacion.get(0) ).getLoad().clear();
+        canasta.add('C');
     }
 
     @Override
@@ -85,6 +90,10 @@ public class MovilAgil extends Robot{
     @Override
     public boolean movimiento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    @Override
+    public int status(){
+        return 2;
     }
         @Override
     public String toString() {

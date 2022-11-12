@@ -69,14 +69,20 @@ public class Mano extends Robot {
        return temp;
     }
 
-    @Override
-    public ArrayList<Character> chr() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean chr(ArrayList<Robot> simulacion) {
+        if ( ( (Mano)simulacion.get(0) ).getLoad().isEmpty() ){
+           ( (Mano) simulacion.get(0) ).getLoad().add('C');
+           return true;
+           
+        } else{
+           return false;
+        }
     }
 
     @Override
-    public ArrayList<Character> dmnt() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void dmnt(ArrayList<Robot> simulacion, ArrayList<Character> canasta) {
+        ( (Mano) simulacion.get(0) ).getLoad().clear();
+        canasta.add('C');
     }
 
     @Override
@@ -88,6 +94,11 @@ public class Mano extends Robot {
     public boolean movimiento() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    @Override
+    public int status(){
+        return 1;
+    }
+    
 
     @Override
     public String toString() {
